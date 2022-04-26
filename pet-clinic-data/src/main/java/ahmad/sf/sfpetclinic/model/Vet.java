@@ -1,4 +1,4 @@
 package ahmad.sf.sfpetclinic.model;
 
-public class Vet extends Person {
+public class Vet extends Person  {
 }
