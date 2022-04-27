@@ -3,9 +3,11 @@ package ahmad.sf.sfpetclinic.services.map;
 import ahmad.sf.sfpetclinic.model.Pet;
 import ahmad.sf.sfpetclinic.services.CrudService;
 import ahmad.sf.sfpetclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
