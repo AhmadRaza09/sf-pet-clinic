@@ -4,13 +4,13 @@ import java.util.Set;
 
 public class Vet extends Person {
 
-    private Set<Speciality> specialitys;
+    private Set<Speciality> specialities;
 
-    public Set<Speciality> getSpecialitys() {
-        return specialitys;
+    public Set<Speciality> getSpecialities() {
+        return specialities;
     }
 
-    public void setSpecialitys(Set<Speciality> specialitys) {
-        this.specialitys = specialitys;
+    public void setSpecialities(Set<Speciality> specialities) {
+        this.specialities = specialities;
     }
 }
