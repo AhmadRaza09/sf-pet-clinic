@@ -14,4 +14,9 @@ public class IndexController {
         model.addAttribute("title", "Pet Clinic Index");
         return "index";
     }
+
+    @RequestMapping(value = {"/oups"}, method = RequestMethod.GET)
+    public String UopsHandler(){
+        return "notimplemented";
+    }
 }
