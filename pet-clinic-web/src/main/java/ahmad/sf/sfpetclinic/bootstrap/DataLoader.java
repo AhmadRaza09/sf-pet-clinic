@@ -5,10 +5,12 @@ import ahmad.sf.sfpetclinic.model.Pet;
 import ahmad.sf.sfpetclinic.model.PetType;
 import ahmad.sf.sfpetclinic.model.Speciality;
 import ahmad.sf.sfpetclinic.model.Vet;
+import ahmad.sf.sfpetclinic.model.Visit;
 import ahmad.sf.sfpetclinic.services.OwnerService;
 import ahmad.sf.sfpetclinic.services.PetTypeService;
 import ahmad.sf.sfpetclinic.services.SpecialityService;
 import ahmad.sf.sfpetclinic.services.VetService;
+import ahmad.sf.sfpetclinic.services.VisitService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +23,15 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
     public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-                      SpecialityService specialityService) {
+                      SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -89,15 +93,22 @@ public class DataLoader implements CommandLineRunner {
         owner2.setCity("Lahore");
         owner2.setTelephone("1234556");
 
-        Pet FionasCat = new Pet();
-        mikesPet.setPetType(savedCatPetType);
-        mikesPet.setOwner(owner2);
-        mikesPet.setBirthDate(LocalDate.now());
-        mikesPet.setName("Just Cat");
+        Pet fionasCat = new Pet();
+        fionasCat.setPetType(savedCatPetType);
+        fionasCat.setOwner(owner2);
+        fionasCat.setBirthDate(LocalDate.now());
+        fionasCat.setName("Just Cat");
 
-        owner2.getPets().add(mikesPet);
+        owner2.getPets().add(fionasCat);
 
         ownerService.save(owner2);
+
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionasCat);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("Sneezy Kitty");
+
+        visitService.save(catVisit);
 
         System.out.println("Loaded Owners......");
 
