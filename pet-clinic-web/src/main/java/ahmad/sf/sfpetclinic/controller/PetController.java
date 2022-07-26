@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Controller
@@ -49,9 +51,18 @@ public class PetController {
         return this.ownerService.findById(ownerId);
     }
 
-    @InitBinder("owner")
-    public void initOwnerBinder(WebDataBinder dataBinder) {
+    @InitBinder()
+    public void dataBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
+
+        dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException{
+                System.out.println("----------------------");
+                System.out.println("Running");
+                setValue(LocalDate.parse(text));
+            }
+        });
     }
 
     @GetMapping(value = "/pets/new")
